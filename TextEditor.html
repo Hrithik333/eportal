@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Text Editor</title>
+    </head>
+    <body onload="enableEditMode();">
+        <div>
+            <button onclick="execCmd('bold');"><h2><b>B</b></h2></button>
+            <button onclick="execCmd('italic');"><h2><i>I</i></h2></button>
+            <button onclick="execCmd('underline');"><h2><u>U</u></h2></button>
+            <button onclick="execCmd('strikeThrough');"><h2><strike>S</strike></h2></button>
+            <button onclick="execCmd('subscript');"><h2>X<sub>2</sub></h2></button>
+            <button onclick="execCmd('superscript');"><h2>X<sup>2</sup></h2></button>
+            <button onclick="execCmd('justifyRight');"><h2><b>AR</b></h2></button>
+            <button onclick="execCmd('JustifyLeft');"><h2><b>AL</b></h2></button>
+            <button onclick="execCmd('justifyCenter');"><h2><b>J</b></h2></button>
+            <button onclick="execCmd('undo');"><h2><b>undo</b></h2></button>
+            <button onclick="execCmd('redo');"><h2><b>redo</b></h2></button>
+            <button onclick="execCmd('insertUnorderedList');"><h2><b>UL</b></h2></button>
+            <button onclick="execCmd('insertOrderedList');"><h2><b>OL</b></h2></button>
+            <button onclick="execCmd('insertHorizontalRule');"><h2><b>HR</b></h2></button>
+            <button onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\'));"><h2><b>Link</b></h2></button>
+            <button onclick="execCmd('unlink');"><h2><b>UnLink</b></h2></button>
+            <br>
+            <select onchange="execCmdValue('formatBlock', this.value)">
+                <option value="None">None</option>
+                <option value="h1">H1</option>
+                <option value="h2">H2</option>
+                <option value="h3">H3</option>
+                <option value="h4">H4</option>
+                <option value="h5">H5</option>
+                <option value="h6">H6</option>
+            </select>
+            <select onchange="execCmdValue('fontName', this.value);">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier">courier</option> 
+            </select>
+            <select onchange="execCmdValue('fontSize', this.value)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            Fore Color: <input type="color" onchange="execCmdValue('foreColor', this.value)">
+            <button onclick="execCmdValue('insertImage', prompt('image path or URL'));"><h2><b>image</b></h2></button>
+        </div>
+        <iframe name="textField", style="width: 1000px; height: 500px"></iframe>
+        <script type="text/javascript">
+            function enableEditMode() {
+                textField.document.designMode = 'on';
+            }
+            function execCmd(command) {
+                textField.document.execCommand(command, false, null);
+            }
+            function execCmdValue(command, value) {
+                textField.document.execCommand(command, false, value)
+            }
+        </script>
+    </body>
+</html>
