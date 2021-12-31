@@ -1,9 +1,32 @@
 <html>
     <head>
         <title>Text Editor</title>
+        <script src="TextEditor.js"></script>
     </head>
+    <style>
+        #articles{
+            background-color: azuref;
+            display: flex;
+            margin: 5px;
+            padding: 3px;
+            border: 10px;
+            border-color: black;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .rticles{
+            background-color: white;
+            margin: 10px;
+            border: 3px solid black;
+            padding: 5px;
+            text-align: center;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
     <body onload="enableEditMode();">
-        <div>
+        <div textAlign='justifyCenter'>
             <button onclick="execCmd('bold');"><h2><b>B</b></h2></button>
             <button onclick="execCmd('italic');"><h2><i>I</i></h2></button>
             <button onclick="execCmd('underline');"><h2><u>U</u></h2></button>
@@ -18,7 +41,7 @@
             <button onclick="execCmd('insertUnorderedList');"><h2><b>UL</b></h2></button>
             <button onclick="execCmd('insertOrderedList');"><h2><b>OL</b></h2></button>
             <button onclick="execCmd('insertHorizontalRule');"><h2><b>HR</b></h2></button>
-            <button onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\'));"><h2><b>Link</b></h2></button>
+            <button onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\\\')), target='blank';"><h2><b>Link</b></h2></button>
             <button onclick="execCmd('unlink');"><h2><b>UnLink</b></h2></button>
             <br>
             <select onchange="execCmdValue('formatBlock', this.value)">
@@ -49,17 +72,67 @@
             Fore Color: <input type="color" onchange="execCmdValue('foreColor', this.value)">
             <button onclick="execCmdValue('insertImage', prompt('image path or URL'));"><h2><b>image</b></h2></button>
         </div>
-        <iframe name="textField", style="width: 1000px; height: 500px"></iframe>
-        <script type="text/javascript">
-            function enableEditMode() {
-                textField.document.designMode = 'on';
-            }
-            function execCmd(command) {
-                textField.document.execCommand(command, false, null);
-            }
-            function execCmdValue(command, value) {
-                textField.document.execCommand(command, false, value)
-            }
-        </script>
+        <br>
+        <form method="post" action="/textEditor">
+            <input id="inTitle" type="text" name="title" placeholder="Title..." style="width: 80vw; font-size: xx-large;height: auto;">
+            <input id="text" type="text" name="text" style="display: none;">
+            <input type="submit" onclick="display()">
+        </form>
+        <iframe name="textField", id="textField", style="width: 90vw; height: 500px"></iframe>
+        <div id="articles">
+            <h2>Your Articles...</h2>
+        </div>
     </body>
+    <script>
+        
+showArticles();
+function enableEditMode() {
+    textField.document.designMode = 'on';
+}
+function execCmd(command) {
+    textField.document.execCommand(command, false, null);
+}
+function execCmdValue(command, value) {
+    textField.document.execCommand(command, false, value)
+}
+function display() {
+        let str = textField.document.getElementsByTagName('body')[0].innerHTML
+        let title = document.getElementById('inTitle').value
+        document.getElementById('text').value = str;
+        let titleObj = []
+        if(localStorage.length == 0) {
+            if(title == "")
+                title = "Note: 1"
+        }
+        else {
+            titleObj = JSON.parse(localStorage.getItem('title'))
+            if(title == "") {
+                let len = titleObj.len + 1;
+                title = "Note: " + len.toString()
+            }
+        }
+        titleObj.push(title);
+        localStorage.setItem('title', JSON.stringify(titleObj));
+
+        showArticles();
+}
+function showArticles() {
+    if(localStorage.length > 0) {
+        let titleObj = JSON.parse(localStorage.getItem('title'))
+        let html = ""
+        titleObj.forEach(function(element, index) {
+            html += `<div class='rticles'>
+                     <h1>${element}</h1>
+                     <button onclick="fetchDB();"><h2>Edit Article</h2></button>
+                     </div>`
+        });
+        document.getElementById('articles').innerHTML = html;
+    }
+}
+function fetchDB(index) {
+    console.log('fetched')
+    textField.document.getElementsByTagName('body')[0].innerHTML = edText
+    document.getElementById('inTitle').value = edTitle
+}
+    </script>
 </html>
