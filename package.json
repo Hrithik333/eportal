@@ -1,0 +1,28 @@
+{
+  "name": "eportal",
+  "version": "1.0.0",
+  "description": "Daily News EPortal",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ANSHUMANRAY/eportal.git"
+  },
+  "author": "Hritik Tiwary & Anshuman Ray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ANSHUMANRAY/eportal/issues"
+  },
+  "homepage": "https://github.com/ANSHUMANRAY/eportal#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.3",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7"
+  }
+}
