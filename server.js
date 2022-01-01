@@ -5,7 +5,7 @@ const { stringify } = require('nodemon/lib/utils');
 // let path = require('path')
 let app = express()
 
-// app.set("view engine", "ejs")
+app.set("view engine", "ejs")
 
 mongoose.connect("mongodb://localhost:27017/eportalDB", {useNewUrlParser: true});
 
@@ -22,24 +22,27 @@ app.get('/', (req, res)=> {
     res.sendFile(__dirname + '/index.html')
 })
 
+let t = "Text of the Article"
+let T = "Title of the Article"
+
 app.get('/textEditor', (req, res) => {
-    res.sendFile(__dirname + '/TextEditor.html')
+    console.log(req.params)
+    res.render('textEditor', {inTex: '', inTi: ''})
 })
 
 app.post('/textEditor', (req, res) => {
-    console.log(req.body.text);
-    console.log(req.body.title);
-    var edText = req.body.text;
-    var edTitle = req.body.title;
+    console.log(req.params)
+    let edText = req.body.text;
+    let edTitle = req.body.title;
     let article = new Article({
         title: req.body.title,
         text: req.body.text
     })
     article.save();
-    res.redirect('/textEditor')
+    res.render('textEditor', {inTex: edText, inTi: edTitle})
 })
 
-app.use(express.static(__dirname + '/TextEditor.js'))
+app.use(express.static(__dirname))
 
 app.listen(3000, ()=>{
     console.log("Server listening to port 3000")
