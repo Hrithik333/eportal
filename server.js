@@ -31,7 +31,6 @@ app.get('/textEditor', (req, res) => {
 })
 
 app.post('/textEditor', (req, res) => {
-    console.log(req.params)
     let edText = req.body.text;
     let edTitle = req.body.title;
     let article = new Article({
