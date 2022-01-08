@@ -73,16 +73,24 @@
         </div>
         <br>
         <form method="post" action="/textEditor">
-            <input id="inTitle" type="text" name="title" placeholder="Title..." style="width: 80vw; font-size: xx-large;height: auto;">
+            <input id="inTitle" type="text" name="title" placeholder="Title..." style="width: 80vw; font-size: xx-large;height: auto; font-weight: bold;">
             <input id="text" type="text" name="text" style="display: none;">
-            <input type="submit" onclick="display()">
+            <input type="submit" onclick="display()" style="font-size: xx-large;">
         </form>
-        <iframe name="textField", id="textField", style="width: 90vw; height: 500px"></iframe>
+        <iframe name="textField", id="textField", style="width: 90vw; height: 500px">
+            <html>
+                <body></body>
+            </html>>
+        </iframe>
         <div id="articles">
             <h2>Your Articles...</h2>
         </div>
-    </body>
     <script>
+        console.log("script tag is working")
+        let edText = `<%-inTex%>`;
+        let edTitle = "<%-inTi%>";
+        textField.document.getElementsByTagName('body')[0].innerHTML = edText
+    document.getElementById('inTitle').value = edTitle
         
 showArticles();
 function enableEditMode() {
@@ -134,4 +142,5 @@ function fetchDB(index) {
     document.getElementById('inTitle').value = edTitle
 }
     </script>
+    </body>
 </html>
