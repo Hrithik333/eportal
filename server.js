@@ -26,8 +26,45 @@ let t = "Text of the Article"
 let T = "Title of the Article"
 
 app.get('/textEditor', (req, res) => {
-    console.log(req.params)
-    res.render('textEditor', {inTex: '', inTi: ''})
+    let arr = [];
+    Article.find((err, article) => {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            article.forEach((element) => {
+                let elem = '\"' + String(element.title) + '\"'
+                arr.push(elem);
+            })
+            res.render('textEditor', {inTex: '', inTi: '', titleArray: arr})
+        }
+    })
+    // res.render('textEditor', {inTex: '', inTi: ''})
+})
+
+app.get('/textEditor/:title', (req, res) => {
+    let arr = [];
+    console.log(req.params.title)
+    Article.find((err, article) => {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            let title = ""
+            let text = "";
+            article.forEach((element) => {
+                let elem = '\"' + String(element.title) + '\"'
+                arr.push(elem);
+                if(element.title == req.params.title) {
+                    console.log(element);
+                    title = element.title;
+                    text = element.text;
+                }
+            })
+            res.render('textEditor', {inTex: text, inTi: title, titleArray: arr})
+        }
+    })
+    // res.render('textEditor', {inTex: tex, inTi: ti})
 })
 
 app.post('/textEditor', (req, res) => {
@@ -38,7 +75,8 @@ app.post('/textEditor', (req, res) => {
         text: req.body.text
     })
     article.save();
-    res.render('textEditor', {inTex: edText, inTi: edTitle})
+    // res.render('textEditor', {inTex: edText, inTi: edTitle})
+    res.redirect('/textEditor/'+req.body.title)
 })
 
 app.use(express.static(__dirname))
