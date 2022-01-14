@@ -1,3 +1,7 @@
+
+
+
+
 <html>
     <head>
         <title>Text Editor</title>
@@ -24,6 +28,7 @@
             width: 200px;
         }
     </style>
+    
     <body onload="enableEditMode();">
         <div textAlign='justifyCenter'>
             <button onclick="execCmd('bold');"><h2><b>B</b></h2></button>
@@ -41,7 +46,8 @@
             <button onclick="execCmd('insertOrderedList');"><h2><b>OL</b></h2></button>
             <button onclick="execCmd('insertHorizontalRule');"><h2><b>HR</b></h2></button>
             <button onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\\\')), target='blank';"><h2><b>Link</b></h2></button>
-            <button onclick="execCmd('unlink');"><h2><b>UnLink</b></h2></button>
+            <button onclick="execCmd('unlink');"><h2><b>UnLink</b></h2>
+          
             <br>
             <select onchange="execCmdValue('formatBlock', this.value)">
                 <option value="None">None</option>
