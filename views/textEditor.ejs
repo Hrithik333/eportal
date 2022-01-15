@@ -1,14 +1,12 @@
 
 
-
-
 <html>
     <head>
-        <title>Text Editor</title>
+        <h3>Text Editor</h3>
     </head>
     <style>
         #articles{
-            background-color: azuref;
+            background-color: white;
             display: flex;
             margin: 5px;
             padding: 3px;
@@ -19,7 +17,7 @@
             justify-content: space-evenly;
         }
         .rticles{
-            background-color: white;
+            background-color:white;
             margin: 10px;
             border: 3px solid black;
             padding: 5px;
@@ -28,60 +26,63 @@
             width: 200px;
         }
     </style>
-    
+   <script src="https://kit.fontawesome.com/e7e74988d6.js" crossorigin="anonymous"></script>
+
     <body onload="enableEditMode();">
         <div textAlign='justifyCenter'>
-            <button onclick="execCmd('bold');"><h2><b>B</b></h2></button>
-            <button onclick="execCmd('italic');"><h2><i>I</i></h2></button>
-            <button onclick="execCmd('underline');"><h2><u>U</u></h2></button>
-            <button onclick="execCmd('strikeThrough');"><h2><strike>S</strike></h2></button>
-            <button onclick="execCmd('subscript');"><h2>X<sub>2</sub></h2></button>
-            <button onclick="execCmd('superscript');"><h2>X<sup>2</sup></h2></button>
-            <button onclick="execCmd('justifyRight');"><h2><b>AR</b></h2></button>
-            <button onclick="execCmd('JustifyLeft');"><h2><b>AL</b></h2></button>
-            <button onclick="execCmd('justifyCenter');"><h2><b>J</b></h2></button>
-            <button onclick="execCmd('undo');"><h2><b>undo</b></h2></button>
-            <button onclick="execCmd('redo');"><h2><b>redo</b></h2></button>
-            <button onclick="execCmd('insertUnorderedList');"><h2><b>UL</b></h2></button>
-            <button onclick="execCmd('insertOrderedList');"><h2><b>OL</b></h2></button>
-            <button onclick="execCmd('insertHorizontalRule');"><h2><b>HR</b></h2></button>
-            <button onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\\\')), target='blank';"><h2><b>Link</b></h2></button>
-            <button onclick="execCmd('unlink');"><h2><b>UnLink</b></h2>
+            <button style="height:45px;width:40px" onclick="execCmd('bold');"><h2><i class="fas fa-bold"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('italic');"><h2><i class="fas fa-italic"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('underline');"><h2><i class="fas fa-underline"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('strikeThrough');"><h2><i class="fas fa-strikethrough"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('subscript');"><h2><i class="fas fa-subscript"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('superscript');"><h2><i class="fas fa-superscript"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('justifyRight');"><h2><i class="fas fa-indent"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('JustifyLeft');"><h2><i class="fas fa-outdent"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('justifyCenter');"><h2><i class="fas fa-align-justify"></i></h2></button>
+            <button style="height:45px;width:60px" onclick="execCmd('undo');"><h2><i class="fas fa-undo"></i></h2></button>
+            <button style="height:45px;width:60px" onclick="execCmd('redo');"><h2><i class="fas fa-redo"></i></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('insertUnorderedList');"><h2><b>UL</b></h2></button>
+            <button style="height:45px;width:40px" onclick="execCmd('insertOrderedList');"><h2><b>OL</b></h2></button>
+            <button style="height:45px;width:60px" onclick="execCmd('insertHorizontalRule');"><h2><b>HR</b></h2></button>
+            <button style="height:45px;width:60px" onclick="execCmdValue('createLink', prompt('Enter the URL', 'https:\\\\')), target='blank';"><h2><i class="fas fa-link"></i></h2></button>
+            <button style="height:45px;width:100px" onclick="execCmd('unlink');"><h2><i class="fas fa-unlink"></i></h2>
           
-            <br>
-            <select onchange="execCmdValue('formatBlock', this.value)">
-                <option value="None">None</option>
-                <option value="h1">H1</option>
-                <option value="h2">H2</option>
-                <option value="h3">H3</option>
-                <option value="h4">H4</option>
-                <option value="h5">H5</option>
-                <option value="h6">H6</option>
-            </select>
-            <select onchange="execCmdValue('fontName', this.value);">
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Courier">courier</option> 
-            </select>
-            <select onchange="execCmdValue('fontSize', this.value)">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
+          
+          
+
             Fore Color: <input type="color" onchange="execCmdValue('foreColor', this.value)">
-            <button onclick="execCmdValue('insertImage', prompt('image path or URL'));"><h2><b>image</b></h2></button>
+            <button style="height:45px;width:60px" onclick="execCmdValue('insertImage', prompt('image path or URL'));"><h2><i class="fas fa-file-image"></i></button>
+                <select onchange="execCmdValue('formatBlock', this.value)">
+                    <option value="None">None</option>
+                    <option value="h1">H1</option>
+                    <option value="h2">H2</option>
+                    <option value="h3">H3</option>
+                    <option value="h4">H4</option>
+                    <option value="h5">H5</option>
+                    <option value="h6">H6</option>
+                </select>
+                <select onchange="execCmdValue('fontName', this.value);">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Courier">courier</option> 
+                </select>
+                <select onchange="execCmdValue('fontSize', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
         </div>
         <br>
         <form method="post" action="/textEditor">
             <input id="inTitle" type="text" name="title" placeholder="Title..." style="width: 80vw; font-size: xx-large;height: auto; font-weight: bold;">
             <input id="text" type="text" name="text" style="display: none;">
-            <input type="submit" onclick="display()" style="font-size: xx-large;">
+            <input  type="submit" onclick="display()" style="font-size: xx-large;">
         </form>
         <iframe name="textField", id="textField", style="width: 90vw; height: 500px">
             <html>
@@ -89,7 +90,7 @@
             </html>>
         </iframe>
         <div id="articles">
-            <h2>Your Articles...</h2>
+            <h3>Your Articles...</h3>
         </div>
     <script>
         console.log("script tag is working")
