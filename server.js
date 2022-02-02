@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const { stringify } = require('nodemon/lib/utils');
-// let path = require('path')
+const fs = require('fs');
+const { json } = require('body-parser');
 let app = express()
 
 app.set("view engine", "ejs")
@@ -18,7 +19,34 @@ const Article = mongoose.model('Article', articleSchema)
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+function dbWrite() {
+    Article.find((err, article) => {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            let obj={
+                "db":[]
+            }
+            article.forEach((element) => {
+                obj.db.push(element);
+            })
+            fs.writeFile("content.json", JSON.stringify(obj), 'utf8', () => console.log("json file added"))
+        }
+    })
+}
+
+
 app.get('/', (req, res)=> {
+    dbWrite();
+    fs.readFile("content.json", (err, data) => {
+        let obj=JSON.parse(data);
+        let arr=obj.db;
+        arr.forEach((element) => {
+            console.log(element.title);
+        })
+        //console.log(JSON.parse(data));
+    })
     res.sendFile(__dirname + '/index.html')
 })
 
