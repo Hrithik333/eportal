@@ -33,6 +33,8 @@
 <!--===============================================================================================-->	
 	<link rel="stylesheet" type="text/css" href="static/front/css/main.css">
 <!--===============================================================================================-->
+
+<script type="text/javascript" src="content.json"></script>
 </head>
 <body class="animsition">
 	
@@ -3851,8 +3853,25 @@
 	<script src="static/front/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="static/front/js/main.js"></script>
+	<script src="content.json"></script>
+
+	<script>
+		fetch('content.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+			let arr=data.db;
+			arr.forEach((element) => {
+				console.log(element.title);
+			})
+        })
+	</script>
+
 
 </body>
+
 
 <!-- Mirrored from iamomar22.pythonanywhere.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Dec 2021 15:45:23 GMT -->
 </html>

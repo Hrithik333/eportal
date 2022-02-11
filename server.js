@@ -39,15 +39,7 @@ function dbWrite() {
 
 app.get('/', (req, res)=> {
     dbWrite();
-    fs.readFile("content.json", (err, data) => {
-        let obj=JSON.parse(data);
-        let arr=obj.db;
-        arr.forEach((element) => {
-            console.log(element.title);
-        })
-        //console.log(JSON.parse(data));
-    })
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/home.html')
 })
 
 let t = "Text of the Article"

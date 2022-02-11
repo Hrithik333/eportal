@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+    <style>
+        #articles{
+            background-color: azuref;
+            display: flex;
+            margin: 5px;
+            padding: 3px;
+            border: 10px;
+            border-color: black;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .rticles{
+            background-color: white;
+            margin: 10px;
+            border: 3px solid black;
+            padding: 5px;
+            text-align: center;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+    <body>
+        <div id="articles">
+            <h1>Home Page</h1>
+        </div>
+
+        <script type="text" src="content.json"></script>
+
+	<script>
+        let arr;
+		fetch('content.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+			arr=data.db;
+			let html = ""
+            arr.forEach(function(element, index) {
+                html += `<div class='rticles'>
+                         <h2>${element.title}</h2>
+                         <h3>${element.text}</h3>
+                         </div>`
+            });
+        document.getElementById('articles').innerHTML = html;
+        return arr;
+        });
+        console.log(arr);
+	</script>
+    </body>
+</html>
